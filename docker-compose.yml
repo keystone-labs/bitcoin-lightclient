@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  btc-light-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GO_VERSION: 1.22.0
+    container_name: btc-light-client
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"  # Adjust the port according to your application needs
+    environment:
+      - GO_ENV=development
+    restart: unless-stopped 
