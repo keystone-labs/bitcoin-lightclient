@@ -1,0 +1,58 @@
+# Light Client Configuration
+
+# Network Configuration
+bitcoin:
+  network: "mainnet"  # or "testnet"
+  rpc_url: "http://localhost:8332"
+  auth:
+    username: "${BTC_RPC_USER}"
+    password: "${BTC_RPC_PASS}"
+
+# Security Configuration
+security:
+  max_reorg_depth: 6
+  min_work_difficulty: 1  # Minimum PoW difficulty to accept
+  checkpoint_interval: 2016  # blocks
+  max_header_batch: 100
+  max_time_offset: 7200  # seconds
+
+# Relayer Authentication
+relayer:
+  auth:
+    api_key: "${RELAYER_API_KEY}"  # Must match relayer's API key
+    allowed_ips: ["127.0.0.1"]  # IP whitelist for relayer connections
+
+# Storage Configuration
+storage:
+  headers_db: "./data/headers"
+  checkpoints_db: "./data/checkpoints"
+  max_size: 1000  # MB
+  prune_threshold: 800  # MB
+
+# Verification Configuration
+verification:
+  min_confirmations: 6
+  max_block_time_future: 7200  # seconds
+  max_block_time_past: 7200   # seconds
+
+# API Configuration
+api:
+  enabled: true
+  port: 3001
+  auth:
+    api_key: "${API_KEY}"
+    jwt_secret: "${JWT_SECRET}"
+    token_expiry: 3600  # seconds
+
+# Logging Configuration
+logging:
+  level: "info"  # debug, info, warn, error
+  file: "./logs/light-client.log"
+  max_size: 100    # MB
+  max_backups: 3
+  max_age: 28      # days
+
+# Monitoring Configuration
+monitoring:
+  health_check_interval: 60  # seconds
+  metrics_port: 9090 
